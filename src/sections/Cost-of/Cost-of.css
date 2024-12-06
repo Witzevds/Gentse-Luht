@@ -1,0 +1,59 @@
+.cost-of {
+  color: var(--color-light);
+  display: flex;
+  width: 95%;
+  margin: 0 auto;
+  flex-direction: column;
+  & .cost-of__title {
+    color: var(--color-dark);
+    font-size: 3rem;
+    font-family: "Helvetica-neue";
+  }
+
+  & .cost-of__card {
+    background-color: var(--color-dark-grey);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    & .cost-of__card--top {
+      display: flex;
+      justify-content: space-between;
+      & .cost-of__card--list {
+        display: flex;
+
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 4rem 0 4rem 2rem;
+        gap: 1rem;
+        font-family: "Helvetica";
+        font-size: 1.9rem;
+        & img {
+          width: 3rem;
+          height: 3rem;
+        }
+        & li {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+        }
+        & span {
+          color: var(--color-red);
+        }
+      }
+    }
+    & .cost__of--cigarettes {
+      padding: 3rem;
+    }
+    & .cost-of__card--tag {
+      border-radius: 1rem;
+      padding: 3rem 1rem 3rem 1rem;
+      background-color: var(--color-light);
+      color: var(--color-dark);
+      font-family: "Almarai";
+      text-transform: uppercase;
+      display: flex;
+      font-size: 4rem;
+      justify-content: center;
+    }
+  }
+}

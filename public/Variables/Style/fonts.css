@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "Helvetica";
+  src: url("/Variables/Fonts/helvetica/Helvetica.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Helvetica-bold";
+  src: url("/Variables/Fonts/helvetica/Helvetica-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Helvetica-neue";
+  src: url("/Variables/Fonts/helvetica-neue/HelveticaNeueBold.otf")
+    format("opentype");
+}
+@font-face {
+  font-family: "Almarai";
+  src: url("/Variables/Fonts/Almarai/Almarai-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Loveya";
+  src: url("/Variables/Fonts/Love-ya/LoveYa.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LexendMega";
+  src: url("/Variables/Fonts/Lexend-Mega/LexendMega-Variable.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+}
+@font-face {
+  font-family: "Lexend";
+  src: url("/Variables/Fonts/Lexend/Lexend-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+}

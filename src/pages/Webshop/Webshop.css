@@ -1,0 +1,9 @@
+.Limited-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  padding: 3rem;
+}
+body {
+  background-color: #e5e5e5;
+}

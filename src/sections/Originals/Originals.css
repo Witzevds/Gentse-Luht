@@ -1,0 +1,8 @@
+.originals {
+  text-align: center;
+}
+
+.shop {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  font-family: "LexendMega";
+  background-color: var(--color-dark);
+  justify-content: space-between;
+  height: 10vh;
+  align-items: center;
+  & .header__left {
+    display: flex;
+    width: 40%;
+
+    & .header__left--item {
+      list-style: none;
+      & a {
+        text-decoration: none;
+        color: var(--color-light);
+        padding: 0 2rem;
+      }
+    }
+  }
+
+  & .header__logo {
+    width: 5rem;
+  }
+  & .header__right {
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    & .header__right--shop {
+      width: 5rem;
+      padding-right: 2rem;
+    }
+  }
+}

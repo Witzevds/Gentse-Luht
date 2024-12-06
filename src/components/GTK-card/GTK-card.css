@@ -1,0 +1,54 @@
+.gtk-card {
+  position: relative;
+  width: 32%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.gtk-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.gtk-card__text {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  gap: 1rem;
+  color: var(--color-light);
+  font-family: "Helvetica-bold";
+  padding: 1rem;
+
+  & .gtk-card__text--description {
+    font-size: 1.5rem;
+  }
+}
+
+.gtk-card__btn {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Helvetica-bold";
+  font-size: 1.5rem;
+  z-index: 1;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: none;
+  width: 95%;
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  margin-bottom: 0.3rem;
+  border-radius: 3rem;
+
+  align-self: center;
+}

@@ -1,0 +1,122 @@
+.limited {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 1rem;
+  box-shadow: -10px 10px 4px 3px rgba(0, 0, 0, 0.25);
+
+  & .limited__title {
+    font-family: "LexendMega";
+    font-size: 5rem;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  & .limited__mid {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2rem;
+
+    & .limited__mid--image {
+      height: 30rem;
+    }
+    & .limited__mid--name {
+      font-family: "Lexend";
+      font-size: 6rem;
+      width: 30%;
+      font-weight: 400;
+      haight: 20%;
+    }
+    & .limited__mid--choices {
+      display: flex;
+      font-family: "LexendMega";
+      font-size: 1rem;
+      width: 30%;
+      height: 20%;
+
+      flex-direction: column;
+
+      & .limited__mid--choices--name {
+        font-family: "Lexend";
+        font-size: 2rem;
+        font-weight: 400;
+        text-align: end;
+      }
+      & .limited__mid--size {
+        display: flex;
+        gap: 0.8rem;
+        justify-content: end;
+      }
+
+      & .limited__mid--quality {
+        display: flex;
+        gap: 0.8rem;
+        justify-content: end;
+      }
+      & .limited__mid--choice {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  & .limited__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 2rem 2rem;
+    & .limited__bottom--left {
+      display: flex;
+      justify-content: center;
+      width: 40%;
+      font-family: "Helvetica";
+      align-items: center;
+    }
+    & .limited__bottom--price {
+      width: 100%;
+      font-size: 6rem;
+      text-align: center;
+      font-family: "Loveya";
+    }
+    & .limited__bottom--right {
+      display: flex;
+      justify-content: center;
+      width: 40%;
+      align-items: center;
+
+      & .limited__bottom--button {
+        background-color: var(--color-light);
+        color: var(--color-dark);
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        font-family: "Helvetica";
+        height: 2rem;
+        border: none;
+        padding: 0.5rem 2rem;
+      }
+    }
+  }
+}
+.christmas {
+  background: radial-gradient(ellipse, #ffffff 5%, #0a1462 70%);
+  color: #e5e5e5;
+}
+
+.detail-color__christmas {
+  background-color: #e5e5e5;
+  color: #0a1462;
+}
+
+.overpoort {
+  background: radial-gradient(ellipse, #ffc769 5%, #ffa000 70%);
+  color: #905a00;
+}
+.detail-color__overpoort {
+  background-color: #905a00;
+  color: #ffa000;
+}

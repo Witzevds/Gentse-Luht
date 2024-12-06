@@ -1,0 +1,33 @@
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 1rem;
+  & .shop-card__image {
+  }
+  & .shop-card__information {
+    display: flex;
+    justify-content: space-between;
+    & .shop-card__information--left {
+      display: flex;
+      flex-direction: column;
+      font-family: "Helvetica";
+    }
+
+    & .shop-card__information--price {
+      font-family: "Helvetica-Bold";
+    }
+
+    & .shop-card__information--basket {
+      background-color: #d9d9d9;
+      border-radius: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+        width: 5rem;
+      }
+    }
+  }
+}

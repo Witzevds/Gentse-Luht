@@ -1,0 +1,29 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & .hero__text {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    padding: 2rem 0 2rem 0;
+    & .hero__text--title {
+      font-size: 3rem;
+      font-family: "Helvetica-neue";
+    }
+
+    & .hero__text--info {
+      font-size: 2rem;
+      font-family: "Helvetica";
+    }
+  }
+
+  & .hero__display {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-dark);
+    padding: 5rem 0 5rem 0;
+    border-radius: 1rem;
+  }
+}

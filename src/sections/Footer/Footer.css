@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-dark);
+  padding: 2rem 0;
+  margin-top: 2rem;
+  & img {
+    width: 5rem;
+  }
+}
