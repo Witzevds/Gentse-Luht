@@ -25,7 +25,7 @@
       font-size: 6rem;
       width: 30%;
       font-weight: 400;
-      haight: 20%;
+      height: 20%;
     }
     & .limited__mid--choices {
       display: flex;
