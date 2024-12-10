@@ -1,10 +1,10 @@
-import Globe from "../../components/Globe/Globe";
 import Header from "../../components/Header/Header";
+import AQIComparison from "../../functional/api";
 
 const Scanner = () => {
   return (
     <>
-      <Globe />
+      <AQIComparison />
     </>
   );
 };
