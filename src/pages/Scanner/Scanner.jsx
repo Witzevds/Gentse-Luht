@@ -1,5 +1,5 @@
 import Header from "../../components/Header/Header";
-import AQIComparison from "../../functional/api";
+import AQIComparison from "../../functional/apis";
 
 const Scanner = () => {
   return (
