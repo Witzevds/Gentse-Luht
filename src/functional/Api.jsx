@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import ParticleCanvas from "./Particle-sketch/ParticleCanvas"; // Importeer de ParticleCanvas component
 import Chart from "chart.js/auto";
 import "./Api.css";
 
 const AQIComparison = () => {
-  const [city, setCity] = useState("");
-  const [data, setData] = useState({ gent: null, city: null });
-  const [chart, setChart] = useState(null);
+  const [city, setCity] = useState(""); // Bewaar de naam van de stad die de gebruiker invoert
+  const [data, setData] = useState({ gent: null, city: null }); // Bewaar de luchtkwaliteitsdata van Gent en de opgezochte stad
+  const [chart, setChart] = useState(null); // Bewaar de Chart.js instantie
+  const [cityDataLoaded, setCityDataLoaded] = useState(false); // Houd bij of de gegevens van de opgegeven stad geladen zijn
 
   const API_URL = "https://api.waqi.info/feed/";
   const TOKEN = "6d19ee57f244716fca9eb89717bee58a7c50279d";
@@ -55,6 +57,7 @@ const AQIComparison = () => {
         ...prevData,
         city: cityData,
       }));
+      setCityDataLoaded(true); // Zet de stad data geladen na het ophalen van gegevens
       renderChart({
         gent: data.gent?.aqi,
         [city]: cityData.aqi,
@@ -110,6 +113,16 @@ const AQIComparison = () => {
       />
       <button onClick={compareCities}>Vergelijk met Gent</button>
 
+      {/* Deeltjes visualisatie alleen als de stadgegevens geladen zijn */}
+      <div style={{ marginTop: "20px", textAlign: "center" }}>
+        {cityDataLoaded && (
+          <>
+            <ParticleCanvas aqi={data.gent?.aqi || 0} cityName="Gent" />
+            <ParticleCanvas aqi={data.city?.aqi || 0} cityName={city} />
+          </>
+        )}
+      </div>
+
       {/* Grafiek container */}
       <div
         style={{
@@ -125,134 +138,6 @@ const AQIComparison = () => {
         }}
       >
         <canvas id="aqiChart"></canvas>
-      </div>
-
-      {/* Vergelijkingstabel */}
-      <div>
-        {data.gent && data.city && (
-          <div>
-            <ul>
-              <div className="city">
-                <p
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    padding: "10px",
-                  }}
-                >
-                  Stad
-                </p>
-                <li
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    padding: "10px",
-                  }}
-                >
-                  Gent
-                </li>
-                <li
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    padding: "10px",
-                  }}
-                >
-                  {city}
-                </li>
-              </div>
-              <div className="aqi">
-                <p
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    padding: "10px",
-                  }}
-                >
-                  AQI
-                </p>
-                <li
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    padding: "10px",
-                  }}
-                >
-                  {data.gent?.aqi}
-                </li>
-                <li
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    padding: "10px",
-                  }}
-                >
-                  {data.city?.aqi}
-                </li>
-              </div>
-              <div className="pm25">
-                <p
-                  style={{
-                    padding: "10px",
-                  }}
-                >
-                  PM2.5 (μg/m³)
-                </p>
-                <li
-                  style={{
-                    padding: "10px",
-                  }}
-                >
-                  {data.gent?.pm25}
-                </li>
-                <li
-                  style={{
-                    padding: "10px",
-                  }}
-                >
-                  {data.city?.pm25}
-                </li>
-              </div>
-              <div className="date">
-                <p
-                  style={{
-                    padding: "10px",
-                  }}
-                >
-                  Laatste meting
-                </p>
-                <li
-                  style={{
-                    padding: "10px",
-                  }}
-                >
-                  {data.gent?.time}
-                </li>
-                <li
-                  style={{
-                    padding: "10px",
-                  }}
-                >
-                  {data.city?.time}
-                </li>
-              </div>
-            </ul>
-          </div>
-        )}
-      </div>
-
-      {/* Uitleg */}
-      <div style={{ marginTop: "20px", textAlign: "left", padding: "20px" }}>
-        <h3>Wat betekenen deze cijfers?</h3>
-        <ul>
-          <li>
-            <strong>AQI (Air Quality Index):</strong> Dit geeft de algehele
-            luchtkwaliteit weer. Lager is beter. Een waarde boven 100 is
-            schadelijk voor gevoelige groepen.
-          </li>
-          <li>
-            <strong>PM2.5:</strong> Dit meet fijne stofdeeltjes die gevaarlijk
-            kunnen zijn voor de gezondheid. Een waarde onder 50 is ideaal.
-          </li>
-          <li>
-            <strong>Laatste meting:</strong> Dit is het tijdstip waarop de
-            luchtkwaliteitsgegevens zijn verzameld.
-          </li>
-        </ul>
       </div>
     </div>
   );

@@ -1,0 +1,39 @@
+/* ParticleCanvas.css */
+.particle-canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px; /* Pas aan afhankelijk van de gewenste breedte */
+  height: 300px; /* De hoogte van het canvas */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.particle-canvas {
+  width: 100%; /* Zorg ervoor dat het canvas de volledige breedte vult */
+  height: 100%; /* Zorg ervoor dat het canvas de volledige hoogte vult */
+}
+
+.particle-canvas input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.particle-canvas button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.particle-canvas button:hover {
+  background-color: #45a049;
+}

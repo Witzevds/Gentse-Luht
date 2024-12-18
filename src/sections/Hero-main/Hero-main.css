@@ -20,8 +20,10 @@
 
   & .hero__display {
     width: 80%;
+    height: 30rem;
     display: flex;
     justify-content: center;
+    position: relative;
     background-color: var(--color-dark);
     padding: 5rem 0 5rem 0;
     border-radius: 1rem;
