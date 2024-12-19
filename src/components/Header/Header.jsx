@@ -11,7 +11,6 @@ const Header = () => {
           <li className="header__left--item">
             <Link to="/Scanner">Pollution Scanner</Link>
           </li>
-          <li className="header__left--item">Webshop</li>
         </ul>
         <Link to="/">
           <img
