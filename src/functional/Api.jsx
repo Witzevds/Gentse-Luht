@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ParticleCanvas from "./Particle-sketch/ParticleCanvas"; // Importeer de ParticleCanvas component
-import Chart from "chart.js/auto";
 import "./Api.css";
 
 const AQIComparison = () => {
   const [city, setCity] = useState(""); // Bewaar de naam van de stad die de gebruiker invoert
   const [data, setData] = useState({ gent: null, city: null }); // Bewaar de luchtkwaliteitsdata van Gent en de opgezochte stad
-  const [chart, setChart] = useState(null); // Bewaar de Chart.js instantie
+  const [error, setError] = useState(""); // Foutmelding voor stad invoer
   const [cityDataLoaded, setCityDataLoaded] = useState(false); // Houd bij of de gegevens van de opgegeven stad geladen zijn
+  const typingTimeoutRef = useRef(null); // Ref voor debouncing
 
   const API_URL = "https://api.waqi.info/feed/";
   const TOKEN = "6d19ee57f244716fca9eb89717bee58a7c50279d";
@@ -20,7 +20,7 @@ const AQIComparison = () => {
 
       if (result.status === "ok") {
         return {
-          aqi: result.data.aqi || "N/A",
+          aqi: result.data.aqi || 0, // Gebruik 0 als default voor geen deeltjes
           pm25: result.data.iaqi?.pm25?.v || "N/A",
           time: result.data.time?.s || "N/A",
         };
@@ -40,104 +40,103 @@ const AQIComparison = () => {
       const gentData = await getCityAQI("gent");
       if (gentData) {
         setData((prevData) => ({ ...prevData, gent: gentData }));
-        renderChart({ gent: gentData.aqi }); // Render alleen Gent bij initiële load
       }
     };
 
     loadGentData();
   }, []);
 
-  // Functie om de gegevens van de opgegeven stad te vergelijken
-  const compareCities = async () => {
-    if (!city) return;
+  // Functie om stadgegevens te laden zodra de gebruiker begint te typen
+  const handleCityChange = (e) => {
+    const input = e.target.value;
+    setCity(input);
 
-    const cityData = await getCityAQI(city);
-    if (cityData) {
-      setData((prevData) => ({
-        ...prevData,
-        city: cityData,
-      }));
-      setCityDataLoaded(true); // Zet de stad data geladen na het ophalen van gegevens
-      renderChart({
-        gent: data.gent?.aqi,
-        [city]: cityData.aqi,
-      });
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current); // Reset debouncing timer
     }
-  };
 
-  // Functie om de grafiek te renderen
-  const renderChart = (chartData) => {
-    const ctx = document.getElementById("aqiChart").getContext("2d");
-
-    if (chart) {
-      // Update de bestaande grafiek als die er al is
-      chart.data.labels = Object.keys(chartData);
-      chart.data.datasets[0].data = Object.values(chartData);
-      chart.update();
+    if (input.trim() !== "") {
+      typingTimeoutRef.current = setTimeout(async () => {
+        const cityData = await getCityAQI(input);
+        if (cityData) {
+          setData((prevData) => ({
+            ...prevData,
+            city: cityData,
+          }));
+          setCityDataLoaded(true);
+          setError(""); // Reset foutmelding
+        } else {
+          setCityDataLoaded(false);
+          setError("Geen gegevens gevonden voor deze stad.");
+        }
+      }, 300); // Debouncing van 300ms
     } else {
-      // Maak een nieuwe grafiek
-      const newChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: Object.keys(chartData),
-          datasets: [
-            {
-              label: "Air Quality Index (AQI)",
-              data: Object.values(chartData),
-              backgroundColor: ["green", "blue"],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-            },
-          },
-        },
-      });
-      setChart(newChart);
+      setData((prevData) => ({ ...prevData, city: null }));
+      setCityDataLoaded(false);
+      setError(""); // Reset foutmelding
     }
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Vergelijk luchtkwaliteit</h1>
-      <input
-        type="text"
-        placeholder="Voer een stad in..."
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <button onClick={compareCities}>Vergelijk met Gent</button>
-
-      {/* Deeltjes visualisatie alleen als de stadgegevens geladen zijn */}
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
-        {cityDataLoaded && (
-          <>
-            <ParticleCanvas aqi={data.gent?.aqi || 0} cityName="Gent" />
-            <ParticleCanvas aqi={data.city?.aqi || 0} cityName={city} />
-          </>
-        )}
-      </div>
-
-      {/* Grafiek container */}
+    <div className="aqi-comparison">
       <div
         style={{
-          marginTop: "20px",
-          width: "80%",
-          maxWidth: "70vw",
-          height: "60vh",
-          margin: "0 auto",
-          border: "1px solid #ddd",
-          padding: "10px",
-          borderRadius: "8px",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "1rem",
         }}
       >
-        <canvas id="aqiChart"></canvas>
+        <h1>Enter a city name to compare it to Gent</h1>
+        <input
+          type="text"
+          placeholder="Typ een stad in..."
+          value={city}
+          onChange={handleCityChange}
+          className="city-input"
+        />
+        {error && <div className="error-message">{error}</div>}
+      </div>
+
+      {/* Deeltjes visualisatie en informatie */}
+      <div className="particle-wrap">
+        <div className="info-canvas">
+          <ParticleCanvas aqi={data.gent?.aqi || 0} cityName="Gent" />
+          <div style={{ marginTop: "2rem" }} className="city-info">
+            <h3>Gent</h3>
+            <p>
+              <strong>AQI:</strong> {data.gent?.aqi || "Nog geen gegevens"}
+            </p>
+            <p>
+              <strong>PM2.5:</strong> {data.gent?.pm25}
+            </p>
+            <p>
+              <strong>Laatste update:</strong> {data.gent?.time}
+            </p>
+          </div>
+        </div>
+
+        <div className="info-canvas">
+          <ParticleCanvas aqi={data.city?.aqi || 0} cityName={city || "Stad"} />
+          <div style={{ marginTop: "2rem" }} className="city-info">
+            <h3>{city || "stad"}</h3>
+            {cityDataLoaded ? (
+              <>
+                <p>
+                  <strong>AQI:</strong> {data.city?.aqi}
+                </p>
+                <p>
+                  <strong>PM2.5:</strong> {data.city?.pm25}
+                </p>
+                <p>
+                  <strong>Laatste update:</strong> {data.city?.time}
+                </p>
+              </>
+            ) : (
+              <p>Voer een stad in om de gegevens te zien.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

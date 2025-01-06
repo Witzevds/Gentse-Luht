@@ -1,7 +1,7 @@
 .cost-of {
   color: var(--color-light);
   display: flex;
-  width: 95%;
+  width: var(--container-width);
   margin: 0 auto;
   flex-direction: column;
   & .cost-of__title {

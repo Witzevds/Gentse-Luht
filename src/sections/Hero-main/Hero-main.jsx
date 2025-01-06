@@ -12,7 +12,7 @@ const Hero = () => {
         </p>
       </div>
       <div className="hero__display">
-        <a-scene embedded>
+        <a-scene embedded vr-mode-ui="enabled: false">
           <a-light
             type="directional"
             intensity="1"
@@ -20,11 +20,12 @@ const Hero = () => {
           ></a-light>
           <a-light type="ambient" intensity="0.5"></a-light>
 
-          {/* Camera with orbit-controls */}
+          {/* Completely static camera */}
           <a-camera
             position="0 3 10"
-            fov="50"
-            orbit-controls="target: 0 2 -2; enableDamping: true; maxDistance: 15; minDistance: 5;"
+            fov="12"
+            look-controls="false"
+            wasd-controls="false"
           ></a-camera>
 
           {/* 3D-model with infinite rolling animation */}

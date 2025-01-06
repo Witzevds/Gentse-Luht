@@ -19,7 +19,7 @@
   }
 
   & .hero__display {
-    width: 80%;
+    width: var(--container-width);
     height: 30rem;
     display: flex;
     justify-content: center;

@@ -9,10 +9,14 @@
 .gtk {
   margin-top: 10rem;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   padding: 2rem;
+  margin: 0 auto;
   gap: 1rem;
-
+  width: var(
+    --container-width
+  ); /* Maak de kaarten 80% van de breedte van de container */
   & .gtk__title {
     font-size: 3rem;
     font-family: "Helvetica-neue";

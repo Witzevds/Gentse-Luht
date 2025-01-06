@@ -1,0 +1,32 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.city-info {
+  margin-left: 20px;
+  text-align: left;
+  font-size: 16px;
+  height: 10rem;
+}
+
+.city-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #333;
+}
+.info-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.city-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.particle-wrap {
+  display: flex;
+  margin-top: 5rem;
+  gap: 20px;
+  align-items: center;
+}
